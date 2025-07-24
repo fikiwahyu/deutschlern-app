@@ -1,8 +1,71 @@
 import Image from "next/image";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export default function Home() {
+  const invoices = [
+    {
+      invoice: "INV001",
+      status: "Paid",
+      method: "Credit Card",
+      amount: "$250.00",
+    },
+    {
+      invoice: "INV002",
+      status: "Pending",
+      method: "PayPal",
+      amount: "$150.00",
+    },
+    {
+      invoice: "INV003",
+      status: "Unpaid",
+      method: "Bank Transfer",
+      amount: "$350.00",
+    },
+    {
+      invoice: "INV004",
+      status: "Paid",
+      method: "Credit Card",
+      amount: "$450.00",
+    },
+    {
+      invoice: "INV005",
+      status: "Paid",
+      method: "PayPal",
+      amount: "$550.00",
+    },
+  ];
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <Table className="w-lg">
+        <TableCaption>A list of your recent invoices.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">Invoice</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Method</TableHead>
+            <TableHead className="text-right">Amount</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {invoices.map((invoice) => (
+            <TableRow key={invoice.invoice ?? "OKekeke"}>
+              <TableCell className="font-medium">{invoice.invoice}</TableCell>
+              <TableCell>{invoice.status}</TableCell>
+              <TableCell>{invoice.method}</TableCell>
+              <TableCell className="text-right">{invoice.amount}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
