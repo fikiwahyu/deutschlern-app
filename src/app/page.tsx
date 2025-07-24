@@ -1,166 +1,89 @@
-import Image from "next/image";
+"use client";
+import React, { useState } from "react";
 import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { LandingPage } from "@/components/LandingPage";
+import { AuthPage } from "@/components/AuthPage";
+import { Dashboard } from "@/components/Dashboard";
+import { FlashcardPage } from "@/components/FlashcardPage";
+import { PracticePage } from "@/components/PracticePage";
+import { ExamPage } from "@/components/ExamPage";
+import { AnalyticsPage } from "@/components/AnalyticsPage";
+import { ProfilePage } from "@/components/ProfilePage";
+import { TransactionPage } from "@/components/TransactionPage";
+import { SimulationPage } from "@/components/SimulationPage";
+import { CoursePage } from "@/components/CoursePage";
+import { SettingsPage } from "@/components/SettingsPage";
+import { CreditsPage } from "@/components/CreditsPage";
+import { Sidebar } from "@/components/Sidebar";
+import { Toaster } from "@/components/ui/sonner";
 
-export default function Home() {
-  const invoices = [
-    {
-      invoice: "INV001",
-      status: "Paid",
-      method: "Credit Card",
-      amount: "$250.00",
-    },
-    {
-      invoice: "INV002",
-      status: "Pending",
-      method: "PayPal",
-      amount: "$150.00",
-    },
-    {
-      invoice: "INV003",
-      status: "Unpaid",
-      method: "Bank Transfer",
-      amount: "$350.00",
-    },
-    {
-      invoice: "INV004",
-      status: "Paid",
-      method: "Credit Card",
-      amount: "$450.00",
-    },
-    {
-      invoice: "INV005",
-      status: "Paid",
-      method: "PayPal",
-      amount: "$550.00",
-    },
-  ];
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <Table className="w-lg">
-        <TableCaption>A list of your recent invoices.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice ?? "OKekeke"}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.status}</TableCell>
-              <TableCell>{invoice.method}</TableCell>
-              <TableCell className="text-right">{invoice.amount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+// Mock authentication state
+const useAuth = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const login = (userData: any) => {
+    setIsAuthenticated(true);
+    setUser(userData);
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+    setUser(null);
+  };
+
+  return { isAuthenticated, user, login, logout };
+};
+
+function App() {
+  const { isAuthenticated, user, login, logout } = useAuth();
+
+  if (!isAuthenticated) {
+    return (
+      <Router>
+        <div className="min-h-screen bg-background">
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/auth" element={<AuthPage onLogin={login} />} />
+            <Route path="/credits" element={<CreditsPage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+          <Toaster />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </Router>
+    );
+  }
+
+  return (
+    <Router>
+      <div className="flex min-h-screen bg-background">
+        <Sidebar user={user} onLogout={logout} />
+        <main className="flex-1 ml-64">
+          <Routes>
+            <Route path="/" element={<Dashboard user={user} />} />
+            <Route path="/dashboard" element={<Dashboard user={user} />} />
+            <Route path="/flashcards" element={<FlashcardPage />} />
+            <Route path="/practice" element={<PracticePage />} />
+            <Route path="/exams" element={<ExamPage />} />
+            <Route path="/simulation" element={<SimulationPage />} />
+            <Route path="/analytics" element={<AnalyticsPage />} />
+            <Route path="/courses" element={<CoursePage />} />
+            <Route path="/profile" element={<ProfilePage user={user} />} />
+            <Route path="/transactions" element={<TransactionPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/credits" element={<CreditsPage />} />
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          </Routes>
+        </main>
+        <Toaster />
+      </div>
+    </Router>
   );
 }
+
+export default App;
