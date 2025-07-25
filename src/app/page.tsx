@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -42,6 +42,16 @@ const useAuth = () => {
 
 function App() {
   const { isAuthenticated, user, login, logout } = useAuth();
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    // This code only runs on the client, after the component has mounted
+    setIsClient(true);
+  }, []);
+
+  // Don't render the router on the server or during the initial client render
+  if (!isClient) return null;
 
   if (!isAuthenticated) {
     return (
