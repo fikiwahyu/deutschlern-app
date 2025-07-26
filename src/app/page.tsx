@@ -18,6 +18,7 @@ import { TransactionPage } from "@/components/TransactionPage";
 import { SimulationPage } from "@/components/SimulationPage";
 import { CoursePage } from "@/components/CoursePage";
 import { SettingsPage } from "@/components/SettingsPage";
+import { LeaderboardPage } from "@/components/LeaderboardPage";
 import { CreditsPage } from "@/components/CreditsPage";
 import { Sidebar } from "@/components/Sidebar";
 import { Toaster } from "@/components/ui/sonner";
@@ -72,6 +73,7 @@ function App() {
   return (
     <Router>
       <div className="flex min-h-screen bg-background">
+        {/* Don't forget to add a link to '/leaderboard' in your Sidebar component! */}
         <Sidebar user={user} onLogout={logout} />
         <main className="flex-1 ml-64">
           <Routes>
@@ -82,6 +84,7 @@ function App() {
             <Route path="/exams" element={<ExamPage />} />
             <Route path="/simulation" element={<SimulationPage />} />
             <Route path="/analytics" element={<AnalyticsPage />} />
+            <Route path="/leaderboard" element={<LeaderboardPage />} />
             <Route path="/courses" element={<CoursePage />} />
             <Route path="/profile" element={<ProfilePage user={user} />} />
             <Route path="/transactions" element={<TransactionPage />} />

@@ -18,6 +18,7 @@ import {
   LogOut,
   PlayCircle,
   Trophy,
+  Award,
   Clock,
   Heart,
   Info,
@@ -35,6 +36,7 @@ const navigationItems = [
     items: [
       { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
       { icon: TrendingUp, label: "Analytics", href: "/analytics" },
+      { icon: Trophy, label: "Leaderboard", href: "/leaderboard" },
     ],
   },
   {
