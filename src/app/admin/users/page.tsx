@@ -6,8 +6,8 @@ export default async function UsersPage() {
   const data = await getUsersForTable();
 
   return (
-    <div>
-      <h1 className="text-2xl font-semibold mb-4">User Management</h1>
+    <div className="space-y-6">
+      <h1 className="text-3xl font-bold">👥 User Management</h1>
       <DataTable columns={columns} data={data} />
     </div>
   );

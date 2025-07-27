@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useRouter } from "next/navigation";
 
 export const columns: ColumnDef<CourseWithStatus>[] = [
   {
@@ -59,6 +60,8 @@ export const columns: ColumnDef<CourseWithStatus>[] = [
     id: "actions",
     cell: ({ row }) => {
       const course = row.original;
+      const router = useRouter();
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -69,7 +72,11 @@ export const columns: ColumnDef<CourseWithStatus>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>Edit course</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => router.push(`/admin/courses/${course.id}/edit`)}
+            >
+              Edit course
+            </DropdownMenuItem>
             <DropdownMenuItem>View details</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="text-red-500">

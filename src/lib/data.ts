@@ -112,3 +112,30 @@ export async function getRecentCourses() {
   // Return the 5 most recent courses
   return courses.slice(-5).reverse();
 }
+
+export async function createCourse(courseData: Omit<Course, 'id' | 'studentCount' | 'published'>) {
+  await sleep(500);
+  const newCourse: Course = {
+    id: `c${courses.length + 1}`,
+    ...courseData,
+    studentCount: 0,
+    published: false,
+  };
+  courses.push(newCourse);
+  return newCourse;
+}
+
+export async function getCourseById(id: string): Promise<Course | undefined> {
+  await sleep(200);
+  return courses.find((c) => c.id === id);
+}
+
+export async function updateCourse(id: string, data: Partial<Course>): Promise<Course | undefined> {
+  await sleep(500);
+  const courseIndex = courses.findIndex((c) => c.id === id);
+  if (courseIndex === -1) {
+    return undefined;
+  }
+  courses[courseIndex] = { ...courses[courseIndex], ...data };
+  return courses[courseIndex];
+}
