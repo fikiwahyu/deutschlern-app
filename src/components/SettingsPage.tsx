@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import {
   Card,
   CardContent,
@@ -36,6 +37,13 @@ import {
 import { toast } from "sonner";
 
 export function SettingsPage() {
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const [notifications, setNotifications] = useState({
     email: true,
     push: true,
@@ -53,7 +61,6 @@ export function SettingsPage() {
   });
 
   const [preferences, setPreferences] = useState({
-    theme: "system",
     language: "en",
     timezone: "America/New_York",
     studyGoal: "30",
@@ -107,13 +114,12 @@ export function SettingsPage() {
               <div className="space-y-2">
                 <Label>Theme</Label>
                 <Select
-                  value={preferences.theme}
-                  onValueChange={(value) =>
-                    setPreferences({ ...preferences, theme: value })
-                  }
+                  value={theme}
+                  onValueChange={setTheme}
+                  disabled={!mounted}
                 >
                   <SelectTrigger className="w-48">
-                    <SelectValue />
+                    <SelectValue placeholder="Select theme" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="light">

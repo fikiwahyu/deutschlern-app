@@ -20,6 +20,7 @@ import {
   Shield,
 } from "lucide-react";
 import exampleImage from "figma:asset/93a943ae833a24da8595ccc251ab9d29bb5ecea6.png";
+import { ModeToggle } from "./ModeToogle";
 
 export function LandingPage() {
   const features = [
@@ -101,6 +102,7 @@ export function LandingPage() {
             <Link to="/auth">
               <Button>Get Started</Button>
             </Link>
+            <ModeToggle />
           </nav>
         </div>
       </header>
