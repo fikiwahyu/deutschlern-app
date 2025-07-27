@@ -88,3 +88,27 @@ export async function getUsersForTable(): Promise<UserWithStatus[]> {
     status: Math.random() > 0.5 ? "active" : "invited",
   }));
 }
+
+export type CourseWithStatus = Course & {
+  status: "published" | "draft";
+};
+
+export async function getCoursesForTable(): Promise<CourseWithStatus[]> {
+  await sleep(500);
+  return courses.map((c) => ({
+    ...c,
+    status: c.published ? "published" : "draft",
+  }));
+}
+
+export async function getRecentUsers() {
+  await sleep(400);
+  // Return the 5 most recent users
+  return users.slice(-5).reverse();
+}
+
+export async function getRecentCourses() {
+  await sleep(400);
+  // Return the 5 most recent courses
+  return courses.slice(-5).reverse();
+}
