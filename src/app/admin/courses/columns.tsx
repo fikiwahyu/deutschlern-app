@@ -77,7 +77,9 @@ export const columns: ColumnDef<CourseWithStatus>[] = [
             >
               Edit course
             </DropdownMenuItem>
-            <DropdownMenuItem>View details</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => router.push(`/admin/courses/${course.id}`)}>
+              View details
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="text-red-500">
               Delete course

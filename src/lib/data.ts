@@ -139,3 +139,91 @@ export async function updateCourse(id: string, data: Partial<Course>): Promise<C
   courses[courseIndex] = { ...courses[courseIndex], ...data };
   return courses[courseIndex];
 }
+
+export async function createLesson(courseId: string, lessonData: Omit<Lesson, 'id' | 'courseId'>) {
+  await sleep(500);
+  const newLesson: Lesson = {
+    id: `l${lessons.length + 1}`,
+    courseId,
+    ...lessonData,
+  };
+  lessons.push(newLesson);
+  return newLesson;
+}
+
+export async function getLessonsByCourseId(courseId: string): Promise<Lesson[]> {
+  await sleep(200);
+  return lessons.filter((l) => l.courseId === courseId);
+}
+
+export async function getLessonById(id: string): Promise<Lesson | undefined> {
+  await sleep(200);
+  return lessons.find((l) => l.id === id);
+}
+
+export async function updateLesson(id: string, data: Partial<Lesson>): Promise<Lesson | undefined> {
+  await sleep(500);
+  const lessonIndex = lessons.findIndex((l) => l.id === id);
+  if (lessonIndex === -1) {
+    return undefined;
+  }
+  lessons[lessonIndex] = { ...lessons[lessonIndex], ...data };
+  return lessons[lessonIndex];
+}
+
+export async function createQuiz(courseId: string, quizData: Omit<Quiz, 'id' | 'courseId'>) {
+  await sleep(500);
+  const newQuiz: Quiz = {
+    id: `q${quizzes.length + 1}`,
+    courseId,
+    ...quizData,
+  };
+  quizzes.push(newQuiz);
+  return newQuiz;
+}
+
+export async function getQuizzesByCourseId(courseId: string): Promise<Quiz[]> {
+  await sleep(200);
+  return quizzes.filter((q) => q.courseId === courseId);
+}
+
+export async function getQuizById(id: string): Promise<Quiz | undefined> {
+  await sleep(200);
+  return quizzes.find((q) => q.id === id);
+}
+
+export async function updateQuiz(id: string, data: Partial<Quiz>): Promise<Quiz | undefined> {
+  await sleep(500);
+  const quizIndex = quizzes.findIndex((q) => q.id === id);
+  if (quizIndex === -1) {
+    return undefined;
+  }
+  quizzes[quizIndex] = { ...quizzes[quizIndex], ...data };
+  return quizzes[quizIndex];
+}
+
+export interface RevenueData {
+  month: string;
+  totalRevenue: number;
+}
+
+const revenueData: RevenueData[] = [
+  { month: "Jan", totalRevenue: 1000 },
+  { month: "Feb", totalRevenue: 1200 },
+  { month: "Mar", totalRevenue: 1500 },
+  { month: "Apr", totalRevenue: 1300 },
+  { month: "May", totalRevenue: 1700 },
+  { month: "Jun", totalRevenue: 1900 },
+  { month: "Jul", totalRevenue: 2200 },
+  { month: "Aug", totalRevenue: 2000 },
+  { month: "Sep", totalRevenue: 2500 },
+  { month: "Oct", totalRevenue: 2300 },
+  { month: "Nov", totalRevenue: 2700 },
+  { month: "Dec", totalRevenue: 3000 },
+];
+
+export async function getRevenueData(): Promise<RevenueData[]> {
+  await sleep(500);
+  return revenueData;
+}
+
