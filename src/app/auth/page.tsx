@@ -1,25 +1,28 @@
-import React, { useState } from "react";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+"use client";
+// import { useRouter } from "next/router"; // Changed from next/navigation to next/router
+
+import Link from "next/link";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { Separator } from "./ui/separator";
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@radix-ui/react-dropdown-menu";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
-import exampleImage from "figma:asset/93a943ae833a24da8595ccc251ab9d29bb5ecea6.png";
+import { Label } from "@/components/ui/label"; // Changed from recharts to @/components/ui/label
+import { useState } from "react";
 import { toast } from "sonner";
 
-interface AuthPageProps {
-  onLogin: (userData: any) => void;
-}
-
-export function AuthPage({ onLogin }: AuthPageProps) {
+export default function Auth() {
+  // const router = useRouter(); // Initialize useRouter
+  const handleLoginSuccess = (userData: any) => {
+    // router.push("/dashboard"); // Redirect to dashboard on successful login
+  };
   const [showPassword, setShowPassword] = useState(false);
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
   const [registerForm, setRegisterForm] = useState({
@@ -34,7 +37,8 @@ export function AuthPage({ onLogin }: AuthPageProps) {
     // Mock login - in real app, this would call an API
     if (loginForm.email && loginForm.password) {
       toast.success("Welcome back!");
-      onLogin({
+      handleLoginSuccess({
+        // Call handleLoginSuccess instead of onLogin
         id: "1",
         name: "John Doe",
         email: loginForm.email,
@@ -54,7 +58,8 @@ export function AuthPage({ onLogin }: AuthPageProps) {
         return;
       }
       toast.success("Account created successfully!");
-      onLogin({
+      handleLoginSuccess({
+        // Call handleLoginSuccess instead of onLogin
         id: "1",
         name: registerForm.name,
         email: registerForm.email,
@@ -69,7 +74,8 @@ export function AuthPage({ onLogin }: AuthPageProps) {
     toast.success(`Signing in with ${provider}...`);
     // Mock social login
     setTimeout(() => {
-      onLogin({
+      handleLoginSuccess({
+        // Call handleLoginSuccess instead of onLogin
         id: "1",
         name: "John Doe",
         email: `user@${provider.toLowerCase()}.com`,

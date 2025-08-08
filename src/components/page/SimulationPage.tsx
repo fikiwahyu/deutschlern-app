@@ -5,16 +5,16 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
-import { Button } from "./ui/button";
-import { Progress } from "./ui/progress";
-import { Badge } from "./ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { Alert, AlertDescription } from "./ui/alert";
-import { SimulationCard } from "./simulation/SimulationCard";
-import { StepRenderer } from "./simulation/StepRenderer";
-import { SimulationResults } from "./simulation/SimulationResults";
-import { SIMULATIONS, SAMPLE_SIMULATION_STEPS } from "./simulation/constants";
+} from "../ui/card";
+import { Button } from "../ui/button";
+import { Progress } from "../ui/progress";
+import { Badge } from "../ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { Alert, AlertDescription } from "../ui/alert";
+import { SimulationCard } from "../simulation/SimulationCard";
+import { StepRenderer } from "../simulation/StepRenderer";
+import { SimulationResults } from "../simulation/SimulationResults";
+import { SIMULATIONS, SAMPLE_SIMULATION_STEPS } from "../simulation/constants";
 import { Trophy } from "lucide-react";
 import { toast } from "sonner";
 
