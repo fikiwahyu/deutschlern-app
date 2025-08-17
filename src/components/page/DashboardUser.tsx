@@ -30,7 +30,7 @@ interface DashboardProps {
   user: any;
 }
 
-export function Dashboard({ user }: DashboardProps) {
+export function DashboardUser({ user }: DashboardProps) {
   const stats = [
     {
       title: "Study Streak",
@@ -399,3 +399,5 @@ export function Dashboard({ user }: DashboardProps) {
     </div>
   );
 }
+
+export default DashboardUser;

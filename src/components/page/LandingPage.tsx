@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -20,7 +20,7 @@ import {
   Shield,
 } from "lucide-react";
 import exampleImage from "figma:asset/93a943ae833a24da8595ccc251ab9d29bb5ecea6.png";
-import { ModeToggle } from "./ModeToogle";
+import { ModeToggle } from "../ModeToogle";
 
 export function LandingPage() {
   const features = [
@@ -67,7 +67,7 @@ export function LandingPage() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-md sticky top-0 z-50">
+      <header className="border-b bg-white/80 backdrop-blur-md sticky top-0 z-50 dark:bg-gray-900 dark:border-gray-700">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img
@@ -96,10 +96,10 @@ export function LandingPage() {
             >
               About
             </a>
-            <Link to="/auth">
+            <Link href="/auth">
               <Button variant="outline">Sign In</Button>
             </Link>
-            <Link to="/auth">
+            <Link href="/auth">
               <Button>Get Started</Button>
             </Link>
             <ModeToggle />
@@ -121,7 +121,7 @@ export function LandingPage() {
             analytics to create the most effective learning experience.
           </p>
           <div className="flex gap-4 justify-center mb-12">
-            <Link to="/auth">
+            <Link href="/auth">
               <Button size="lg" className="text-lg px-8">
                 Start Learning Free
               </Button>
@@ -313,7 +313,7 @@ export function LandingPage() {
               <a href="#" className="hover:text-foreground">
                 Terms
               </a>
-              <Link to="/credits" className="hover:text-foreground">
+              <Link href="/credits" className="hover:text-foreground">
                 Credits
               </Link>
               <a href="#" className="hover:text-foreground">
@@ -330,3 +330,5 @@ export function LandingPage() {
     </div>
   );
 }
+
+export default LandingPage;

@@ -1,5 +1,9 @@
+"use client";
+
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+// import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 import { cn } from "../lib/utils";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
@@ -24,10 +28,10 @@ import {
   Info,
 } from "lucide-react";
 import exampleImage from "figma:asset/93a943ae833a24da8595ccc251ab9d29bb5ecea6.png";
+import { ModeToggle } from "@/components/ModeToogle";
 
 interface SidebarProps {
   user: any;
-  onLogout: () => void;
 }
 
 const navigationItems = [
@@ -59,9 +63,12 @@ const navigationItems = [
   },
 ];
 
-export function Sidebar({ user, onLogout }: SidebarProps) {
-  const location = useLocation();
+const onLogout = () => {
+  // Handle logout logic here, e.g., clear session, redirect to login page, etc.
+  redirect("/login");
+};
 
+export function Sidebar({ user }: SidebarProps) {
   return (
     <div className="fixed left-0 top-0 z-40 h-screen w-64 bg-card border-r">
       <div className="flex h-full flex-col">
@@ -103,9 +110,10 @@ export function Sidebar({ user, onLogout }: SidebarProps) {
               </h3>
               <div className="space-y-1">
                 {section.items.map((item) => {
-                  const isActive = location.pathname === item.href;
+                  const isActive =
+                    /*"location.pathname"*/ "/leaderboard" === item.href;
                   return (
-                    <Link key={item.href} to={item.href}>
+                    <Link key={item.href} href={item.href}>
                       <Button
                         variant={isActive ? "secondary" : "ghost"}
                         className={cn(
@@ -147,12 +155,13 @@ export function Sidebar({ user, onLogout }: SidebarProps) {
         {/* Footer */}
         <div className="p-4 border-t space-y-2">
           {/* Credits Link */}
-          <Link to="/credits">
+          <Link href="/credits">
             <Button variant="ghost" className="w-full justify-start gap-3">
               <Heart className="h-4 w-4" />
               Credits
             </Button>
           </Link>
+          <ModeToggle />
 
           {/* Logout */}
           <Button
