@@ -110,8 +110,7 @@ export function Sidebar({ user }: SidebarProps) {
               </h3>
               <div className="space-y-1">
                 {section.items.map((item) => {
-                  const isActive =
-                    /*"location.pathname"*/ "/leaderboard" === item.href;
+                  const isActive = "/leaderboard" === item.href;
                   return (
                     <Link key={item.href} href={item.href}>
                       <Button
