@@ -1,4 +1,4 @@
-import { ExamPage } from "@/components/page/ExamPage";
+import { PracticePage } from "@/components/page/PracticePage";
 import { Sidebar } from "@/components/Sidebar";
 import { redirect } from "next/navigation";
 
@@ -17,7 +17,8 @@ export default function Dashboard() {
       <main className="flex-1 ml-64">
         {" "}
         {/* This margin accounts for the fixed sidebar width */}
-        <ExamPage />
+        <PracticePage />
+        {/* The PracticePage component will render the practice content */}
       </main>
     </div>
   );

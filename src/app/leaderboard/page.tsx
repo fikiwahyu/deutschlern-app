@@ -5,8 +5,8 @@ import { redirect } from "next/navigation";
 // In a real application, this data would be fetched from an API or a session.
 const mockUser = {
   id: "1",
-  name: "John Doe",
-  email: "john.doe@example.com",
+  name: "Yulius Sandro",
+  email: "yulius@gmail.com",
   avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=johndoe`,
 };
 

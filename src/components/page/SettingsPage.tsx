@@ -1,3 +1,6 @@
+"use client";
+// SettingsPage.tsx
+// This file contains the settings page for managing user preferences, notifications, privacy, and account settings.
 import React, { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import {

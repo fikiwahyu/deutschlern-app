@@ -75,7 +75,7 @@ export function Sidebar({ user }: SidebarProps) {
         {/* Header */}
         <div className="flex items-center gap-3 p-6 border-b">
           <img
-            src={"https://api.dicebear.com/7.x/avataaars/svg?seed=social"}
+            src={"/image/coverbookSquare.png"} // Replace with your logo path
             alt="CoverBook"
             className="w-8 h-8"
           />
